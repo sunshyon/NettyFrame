@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using NettyFrame.Server.CoreImpl;
+using NettyFrame.Server.CoreImpl.Http;
 using NettyFrame.Server.Interface;
 using System;
 using System.Reflection;
@@ -22,8 +23,11 @@ namespace NettyFrame.Server
         {
             try
             {
-                DependencyInjectionHelper.RegistServices(s => s.AddScoped<IDotNettyServer, DotNettyServer>());
-                DependencyInjectionHelper.RegistServices(s => s.AddScoped<ITestService, TestService>());
+                DependencyInjectionHelper.RegistServices(s => s.AddScoped<IDotNettyServer, HttpServer>());
+                DependencyInjectionHelper.RegistServices(s => s.AddScoped<IHttpHandler,HttpHandler>());
+                DependencyInjectionHelper.RegistServices(s => s.AddScoped<HttpChannelHandler>());
+                
+                //DependencyInjectionHelper.RegistServices(s => s.AddScoped<ITestService, TestService>());
                 DependencyInjectionHelper.BuildServices();
                 return true;
             }
