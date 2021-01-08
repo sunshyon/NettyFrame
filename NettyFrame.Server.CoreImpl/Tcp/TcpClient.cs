@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 namespace NettyFrame.Server.CoreImpl
 {
     /// <summary>
-    /// 未封装
+    /// 用于TCP客户端
     /// </summary>
-    class DotNettyClient
+    class TcpClient
     {
         static async Task RunClientAsync()
         {
@@ -42,6 +42,9 @@ namespace NettyFrame.Server.CoreImpl
             }
         }
     }
+    /// <summary>
+    /// TCP客户端处理程序
+    /// </summary>
     class HelloClientHandler : ChannelHandlerAdapter
     {
         public override void ChannelActive(IChannelHandlerContext context)

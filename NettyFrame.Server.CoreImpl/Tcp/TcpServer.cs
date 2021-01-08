@@ -12,7 +12,7 @@ using Utility;
 
 namespace NettyFrame.Server.CoreImpl
 {
-    public class DotNettyServer : IDotNettyServer
+    public class TcpServer : IDotNettyServer
     {
         public event Action<string> OnMessage;
         public event Action<string, string> OnSubMessage;
