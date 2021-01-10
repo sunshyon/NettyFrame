@@ -23,9 +23,9 @@ namespace NettyFrame.Server
         {
             try
             {
-                DependencyInjectionHelper.RegistServices(s => s.AddScoped<IDotNettyServer, HttpServer>());
-                DependencyInjectionHelper.RegistServices(s => s.AddScoped<IHttpHandler,HttpHandler>());
-                DependencyInjectionHelper.RegistServices(s => s.AddScoped<HttpChannelHandler>());
+                DependencyInjectionHelper.RegistServices(s => s.AddTransient<IDotNettyServer, HttpServer>());
+                DependencyInjectionHelper.RegistServices(s => s.AddTransient<IHttpHandler,OldHttpHandler>());
+                DependencyInjectionHelper.RegistServices(s => s.AddTransient<HttpChannelHandler>());
                 
                 //DependencyInjectionHelper.RegistServices(s => s.AddScoped<ITestService, TestService>());
                 DependencyInjectionHelper.BuildServices();

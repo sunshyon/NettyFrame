@@ -9,6 +9,6 @@ namespace NettyFrame.Server.Interface
 {
     public interface IHttpHandler
     {
-        IFullHttpResponse GetHttpResponse(IFullHttpRequest request);
+        Task<IFullHttpResponse> GetHttpResponse(IFullHttpRequest request);
     }
 }

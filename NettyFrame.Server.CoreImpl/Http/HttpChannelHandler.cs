@@ -1,4 +1,5 @@
-﻿using DotNetty.Codecs.Http;
+﻿using DotNetty.Buffers;
+using DotNetty.Codecs.Http;
 using DotNetty.Transport.Channels;
 using NettyFrame.Server.Interface;
 using System;
@@ -9,33 +10,61 @@ using System.Threading.Tasks;
 
 namespace NettyFrame.Server.CoreImpl.Http
 {
-    public class HttpChannelHandler : SimpleChannelInboundHandler<object>
+    public class HttpChannelHandler : SimpleChannelInboundHandler<IByteBufferHolder>
     {
-        private readonly IHttpHandler _httpHandler;
-        public HttpChannelHandler(IHttpHandler httpHandler)
+        protected override void ChannelRead0(IChannelHandlerContext ctx, IByteBufferHolder msg)
         {
-            _httpHandler = httpHandler;
-        }
-        protected override void ChannelRead0(IChannelHandlerContext ctx, object msg)
-        {
-            if (msg is IFullHttpRequest request)
-            {
-                Task.Run(async () =>
-                {
-                    IFullHttpResponse response = _httpHandler.GetHttpResponse(request);
-                    await SendHttpResponseAsync(ctx, response);
-                });
-            }
+            Task.Run(async () => await GetHandler().HandlerAsync(ctx, msg));
+
         }
         /// <summary>
-        /// 发送Http返回
+        /// 获得处理器
         /// </summary>
-        /// <param name="ctx"></param>
-        /// <param name="response"></param>
-        private async Task SendHttpResponseAsync(IChannelHandlerContext ctx, IFullHttpResponse response)
+        private HandlerContext GetHandler()
         {
-            await ctx.Channel.WriteAndFlushAsync(response);
-            await ctx.CloseAsync();
+            var handlers = new HandlerContext[]
+            {
+                new WebSocketHandler(),
+                new WebApiHandler(),
+                new FileHandler()
+            };
+            for (var i = 1; i < handlers.Length; i++)
+            {
+                handlers[i - 1].SetNext(handlers[i]);
+            }
+            return handlers[0];
         }
     }
+
+    #region Old
+    //public class HttpChannelHandler : SimpleChannelInboundHandler<object>
+    //{
+    //    private readonly IHttpHandler _httpHandler;
+    //    public HttpChannelHandler(IHttpHandler httpHandler)
+    //    {
+    //        _httpHandler = httpHandler;
+    //    }
+    //    protected override void ChannelRead0(IChannelHandlerContext ctx, object msg)
+    //    {
+    //        if (msg is IFullHttpRequest request)
+    //        {
+    //            Task.Run(async () =>
+    //            {
+    //                IFullHttpResponse response = await _httpHandler.GetHttpResponse(request);
+    //                await SendHttpResponseAsync(ctx, response);
+    //            });
+    //        }
+    //    }
+    //    /// <summary>
+    //    /// 发送Http返回
+    //    /// </summary>
+    //    /// <param name="ctx"></param>
+    //    /// <param name="response"></param>
+    //    private async Task SendHttpResponseAsync(IChannelHandlerContext ctx, IFullHttpResponse response)
+    //    {
+    //        await ctx.Channel.WriteAndFlushAsync(response);
+    //        await ctx.CloseAsync();
+    //    }
+    //} 
+    #endregion
 }

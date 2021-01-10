@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <link href="css/Index.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="timer">0</div>
+    <button id="btnStart">Start</button>
+    <button id="btnStop">Stop</button>
+    <script src="scripts/Index.js"></script>
+    <script>
+        var viewModel = new indexViewModel();
+        var btnStart = document.getElementById("btnStart");
+        var btnStop = document.getElementById("btnStop");
+        btnStart.addEventListener("click", viewModel.start);
+        btnStop.addEventListener("click", viewModel.stop);
+    </script>
+</body>
+
+</html>

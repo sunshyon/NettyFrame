@@ -1,0 +1,15 @@
+{
+  ".html": "text/html",
+  ".js": "application/javascript",
+  ".css": "text/css",
+  ".ico": "image/x-icon",
+  ".jpe": "image/jpge",
+  ".jpg": "image/jpge",
+  ".jpeg": "image/jpge",
+  ".json": "application/json",
+  ".less": "text/css",
+  ".png": "image/png",
+  ".txt": "text/plain",
+  ".woff": "font/x-woff",
+  ".woff2": "application/font-woff2"
+}
