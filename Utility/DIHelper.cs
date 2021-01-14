@@ -3,7 +3,10 @@ using System;
 
 namespace Utility
 {
-    public static class DependencyInjectionHelper
+    /// <summary>
+    /// DependencyInjection  依赖注入帮助类
+    /// </summary>
+    public static class DIHelper
     {
         private static IServiceCollection _services = new ServiceCollection();
         private static IServiceProvider _serviceProvider;

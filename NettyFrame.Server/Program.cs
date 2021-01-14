@@ -23,12 +23,17 @@ namespace NettyFrame.Server
         {
             try
             {
-                DependencyInjectionHelper.RegistServices(s => s.AddTransient<IDotNettyServer, HttpServer>());
-                DependencyInjectionHelper.RegistServices(s => s.AddTransient<IHttpHandler,OldHttpHandler>());
-                DependencyInjectionHelper.RegistServices(s => s.AddTransient<HttpChannelHandler>());
-                
+                DIHelper.RegistServices(s => s.AddTransient<IDotNettyServer, HttpServer>());
+                DIHelper.RegistServices(s => s.AddTransient<IHttpHandler,OldHttpHandler>());
+                DIHelper.RegistServices(s => s.AddTransient<HttpChannelHandler>());
+
+                //xxxHandler
+                DIHelper.RegistServices(s => s.AddTransient<WebSocketHandler>());
+                DIHelper.RegistServices(s => s.AddTransient<WebApiHandler>());
+                DIHelper.RegistServices(s => s.AddTransient<FileHandler>());
+
                 //DependencyInjectionHelper.RegistServices(s => s.AddScoped<ITestService, TestService>());
-                DependencyInjectionHelper.BuildServices();
+                DIHelper.BuildServices();
                 return true;
             }
             catch (Exception e)
@@ -39,7 +44,7 @@ namespace NettyFrame.Server
         }
         private static async Task TestService()
         {
-            var test= DependencyInjectionHelper.GetService<ITestService>();
+            var test= DIHelper.GetService<ITestService>();
             test.SayHello();
         }
         /// <summary>
@@ -56,7 +61,7 @@ namespace NettyFrame.Server
                 {
                     //TestService();
 
-                    var dotNettyServer = DependencyInjectionHelper.GetService<IDotNettyServer>();
+                    var dotNettyServer = DIHelper.GetService<IDotNettyServer>();
                     dotNettyServer.OnException += ConsoleHelper.ServerWriteError;
                     dotNettyServer.OnGetCommand += Console.ReadLine;
                     dotNettyServer.OnMessage += mesage => ConsoleHelper.WriteLine("Message -> ",mesage);

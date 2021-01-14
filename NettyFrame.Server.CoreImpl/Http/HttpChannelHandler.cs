@@ -12,10 +12,23 @@ namespace NettyFrame.Server.CoreImpl.Http
 {
     public class HttpChannelHandler : SimpleChannelInboundHandler<IByteBufferHolder>
     {
+        private readonly WebSocketHandler _webSocketHandler;
+        private readonly WebApiHandler _webApiHandler;
+        private readonly FileHandler _fileHandler;
+        private event Action<Exception> OnException;
+
+        public HttpChannelHandler(WebSocketHandler webSocketHandler,
+            WebApiHandler webApiHandler,
+            FileHandler fileHandler)
+        {
+            _webSocketHandler = webSocketHandler;
+            _webApiHandler = webApiHandler;
+            _fileHandler = fileHandler;
+        }
         protected override void ChannelRead0(IChannelHandlerContext ctx, IByteBufferHolder msg)
         {
-            Task.Run(async () => await GetHandler().HandlerAsync(ctx, msg));
-
+            //Task.Run(async () => await GetHandler().HandlerAsync(ctx, msg));
+            GetHandler().HandlerAsync(ctx, msg);
         }
         /// <summary>
         /// 获得处理器
@@ -24,13 +37,18 @@ namespace NettyFrame.Server.CoreImpl.Http
         {
             var handlers = new HandlerContext[]
             {
-                new WebSocketHandler(),
-                new WebApiHandler(),
-                new FileHandler()
+                //new WebSocketHandler(),
+                //new WebApiHandler(),
+                //new FileHandler()
+                _webSocketHandler,
+                _webApiHandler,
+                _fileHandler
             };
-            for (var i = 1; i < handlers.Length; i++)
+            for (var i = 0; i < handlers.Length; i++)
             {
-                handlers[i - 1].SetNext(handlers[i]);
+                handlers[i].ShowException = OnException;
+                if (i - 1 >= 0)
+                    handlers[i - 1].SetNext(handlers[i]);
             }
             return handlers[0];
         }

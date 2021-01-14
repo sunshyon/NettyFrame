@@ -10,6 +10,7 @@ namespace NettyFrame.Server.CoreImpl.Http
 {
     public abstract class HandlerContext
     {
+        public Action<Exception> ShowException;
         private HandlerContext _handlerContext;
         private bool _canNext = true;
         /// <summary>
