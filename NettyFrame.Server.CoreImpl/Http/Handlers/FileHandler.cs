@@ -17,7 +17,7 @@ namespace NettyFrame.Server.CoreImpl.Http
         {
             try
             {
-                throw new Exception("Test Exception");
+                //throw new Exception("Test Exception");
                 await base.HandlerAsync<IFullHttpRequest>(ctx, byteBufferHolder, HandlerRequestAsync);
             }
             catch(Exception e)

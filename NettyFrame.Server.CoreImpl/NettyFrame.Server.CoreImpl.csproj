@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NettyFrame.Common\NettyFrame.Common.csproj" />
+    <ProjectReference Include="..\NettyFrame.ControllerBus\NettyFrame.ControllerBus.csproj" />
     <ProjectReference Include="..\NettyFrame.Server.Interface\NettyFrame.Server.Interface.csproj" />
     <ProjectReference Include="..\Utility\Utility.csproj" />
   </ItemGroup>

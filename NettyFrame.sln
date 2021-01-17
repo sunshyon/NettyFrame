@@ -3,15 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NettyFrame.Server", "NettyFrame.Server\NettyFrame.Server.csproj", "{06051BA2-80FB-4AF1-99B1-8DEFD9EE872C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NettyFrame.Server", "NettyFrame.Server\NettyFrame.Server.csproj", "{06051BA2-80FB-4AF1-99B1-8DEFD9EE872C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility", "Utility\Utility.csproj", "{12598165-557C-44C5-BE64-42AA16760D81}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utility", "Utility\Utility.csproj", "{12598165-557C-44C5-BE64-42AA16760D81}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NettyFrame.Server.Interface", "NettyFrame.Server.Interface\NettyFrame.Server.Interface.csproj", "{8DD8DE37-6C36-470B-AF08-874867783CC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NettyFrame.Server.Interface", "NettyFrame.Server.Interface\NettyFrame.Server.Interface.csproj", "{8DD8DE37-6C36-470B-AF08-874867783CC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NettyFrame.Server.CoreImpl", "NettyFrame.Server.CoreImpl\NettyFrame.Server.CoreImpl.csproj", "{296F8890-A60B-41D5-8622-00032912B8F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NettyFrame.Server.CoreImpl", "NettyFrame.Server.CoreImpl\NettyFrame.Server.CoreImpl.csproj", "{296F8890-A60B-41D5-8622-00032912B8F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NettyFrame.Common", "NettyFrame.Common\NettyFrame.Common.csproj", "{7E1D1C07-41DB-4DDF-9FBB-AA12BB664103}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NettyFrame.Common", "NettyFrame.Common\NettyFrame.Common.csproj", "{7E1D1C07-41DB-4DDF-9FBB-AA12BB664103}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NettyFrame.ControllerBus", "NettyFrame.ControllerBus\NettyFrame.ControllerBus.csproj", "{0E0665F0-2527-435E-9CC7-B0F832E528ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NettyFrame.Controllers", "NettyFrame.Controllers\NettyFrame.Controllers.csproj", "{9B3FC11A-411D-456A-A13F-A56159DC7ABD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,14 @@ Global
 		{7E1D1C07-41DB-4DDF-9FBB-AA12BB664103}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E1D1C07-41DB-4DDF-9FBB-AA12BB664103}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E1D1C07-41DB-4DDF-9FBB-AA12BB664103}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E0665F0-2527-435E-9CC7-B0F832E528ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E0665F0-2527-435E-9CC7-B0F832E528ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E0665F0-2527-435E-9CC7-B0F832E528ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E0665F0-2527-435E-9CC7-B0F832E528ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B3FC11A-411D-456A-A13F-A56159DC7ABD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B3FC11A-411D-456A-A13F-A56159DC7ABD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B3FC11A-411D-456A-A13F-A56159DC7ABD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B3FC11A-411D-456A-A13F-A56159DC7ABD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

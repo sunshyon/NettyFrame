@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using NettyFrame.ControllerBus;
 using NettyFrame.Server.CoreImpl;
 using NettyFrame.Server.CoreImpl.Http;
 using NettyFrame.Server.Interface;
@@ -23,16 +24,19 @@ namespace NettyFrame.Server
         {
             try
             {
+                //DotNetty
                 DIHelper.RegistServices(s => s.AddTransient<IDotNettyServer, HttpServer>());
-                DIHelper.RegistServices(s => s.AddTransient<IHttpHandler,OldHttpHandler>());
+                //DIHelper.RegistServices(s => s.AddTransient<IHttpHandler,OldHttpHandler>());
                 DIHelper.RegistServices(s => s.AddTransient<HttpChannelHandler>());
 
-                //xxxHandler
+                //Handlers
                 DIHelper.RegistServices(s => s.AddTransient<WebSocketHandler>());
                 DIHelper.RegistServices(s => s.AddTransient<WebApiHandler>());
                 DIHelper.RegistServices(s => s.AddTransient<FileHandler>());
 
-                //DependencyInjectionHelper.RegistServices(s => s.AddScoped<ITestService, TestService>());
+                //ControllerBus
+                DIHelper.RegistServices(x => x.AddControllerBus(Assembly.Load("NettyFrame.Controllers")));
+
                 DIHelper.BuildServices();
                 return true;
             }
@@ -42,15 +46,9 @@ namespace NettyFrame.Server
                 return false;
             }
         }
-        private static async Task TestService()
-        {
-            var test= DIHelper.GetService<ITestService>();
-            test.SayHello();
-        }
         /// <summary>
         /// 测试启动服务
         /// </summary>
-        /// <returns></returns>
         private static async Task StartServer()
         {
             string version = Assembly.GetCallingAssembly().GetName().Version.ToString();

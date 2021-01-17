@@ -40,6 +40,10 @@ namespace NettyFrame.Server.CoreImpl.Http
                 pipeline.AddLast(new HttpServerCodec());
                 pipeline.AddLast(new HttpObjectAggregator(65536));
                 var handler = DIHelper.GetService<HttpChannelHandler>();
+                if (OnException != null)
+                {
+                    handler.OnException += OnException;
+                }
                 pipeline.AddLast(handler);//注入HttpChannelHandler
             }));
             //第五步：配置主机和端口号

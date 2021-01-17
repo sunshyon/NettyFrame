@@ -15,7 +15,7 @@ namespace NettyFrame.Server.CoreImpl.Http
         private readonly WebSocketHandler _webSocketHandler;
         private readonly WebApiHandler _webApiHandler;
         private readonly FileHandler _fileHandler;
-        private event Action<Exception> OnException;
+        public event Action<Exception> OnException;
 
         public HttpChannelHandler(WebSocketHandler webSocketHandler,
             WebApiHandler webApiHandler,

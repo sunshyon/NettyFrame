@@ -14,11 +14,11 @@ namespace Utility
             return JsonConvert.SerializeObject(obj);
         }
 
-        public static T ToT<T>(this string json)
+        public static T JsonToT<T>(this string json)
         {
             return JsonConvert.DeserializeObject<T>(json);
         }
-        public static T ToT<T>(this string json,Type type)
+        public static T JsonToT<T>(this string json,Type type)
         {
             var instance = Activator.CreateInstance(type);
             JsonConvert.PopulateObject(json,instance);
