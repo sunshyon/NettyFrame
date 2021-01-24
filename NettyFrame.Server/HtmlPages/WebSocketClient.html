@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <title>WebSocketTest</title>
+</head>
+<body>
+    <button type="button" onclick="openWebSocket()">打开</button>
+    <input id="inputText" type="text" />
+    <button type="button" onclick="sendMessage()">发送</button>
+    <button type="button" onclick="closeWebSocket()">关闭</button>
+    <script>
+        var websocketUrl = "ws://192.168.3.2:8800/websocket";
+        var inputText = document.getElementById("inputText");
+        var websocketClient;
+        function sendMessage() {
+            if (!websocketClient) return;
+            websocketClient.send(inputText.value);
+        }
+        function closeWebSocket() {
+            if (!websocketClient) return;
+            websocketClient.close();
+        }
+        function openWebSocket() {
+            closeWebSocket();
+            websocketClient = new WebSocket(websocketUrl);
+            websocketClient.onopen = event => {
+                console.log("链接已打开", event);
+            };
+            websocketClient.onmessage = event => {
+                console.log("收到消息", event);
+            };
+            websocketClient.onclose = event => {
+                console.log("链接已关闭", event);
+            };
+            websocketClient.onerror = event => {
+                console.log("WebSocket出错", event);
+            };
+        }
+    </script>
+</body>
+</html>
